@@ -1,4 +1,4 @@
-package com.myatejx.viamvp.ui;
+package com.myatejx.vipmvp.ui;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,27 +11,27 @@ import com.myatejx.architecture.R;
 import com.myatejx.architecture.base.BaseFragment;
 import com.myatejx.architecture.business.bus.BaseResult;
 import com.myatejx.architecture.business.bus.BaseResultCode;
-import com.myatejx.viamvp.business.TestBus;
-import com.myatejx.viamvp.databinding.FragmentTestOneBinding;
+import com.myatejx.vipmvp.business.TestBus;
+import com.myatejx.vipmvp.databinding.FragmentTestTwoBinding;
 
 /**
  * @author KunMinX
  * @date 2018/8/21
  */
-public class TestOneFragment extends BaseFragment {
+public class TestTwoFragment extends BaseFragment {
 
-    private FragmentTestOneBinding mBinding;
+    private FragmentTestTwoBinding mBinding;
 
-    public static TestOneFragment newInstance() {
-        TestOneFragment fragment = new TestOneFragment();
+    public static TestTwoFragment newInstance() {
+        TestTwoFragment fragment = new TestTwoFragment();
         return fragment;
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_test_one, container, false);
-        mBinding = FragmentTestOneBinding.bind(view);
+        View view = inflater.inflate(R.layout.fragment_test_two, container, false);
+        mBinding = FragmentTestTwoBinding.bind(view);
         setHasOptionsMenu(true);
         return view;
     }
@@ -43,17 +43,17 @@ public class TestOneFragment extends BaseFragment {
     }
 
     private void initViews() {
-        TestBus.requestBean();
+        TestBus.requestBeans();
     }
 
     @Override
     public void onResult(BaseResult testResult) {
         int resultCode = testResult.getResultCode();
         switch (resultCode) {
-            case BaseResultCode.GET_BEAN:
-                break;
-            /*case BaseResultCode.GET_BEANS:
+            /*case BaseResultCode.GET_BEAN:
                 break;*/
+            case BaseResultCode.GET_BEANS:
+                break;
             default:
         }
     }

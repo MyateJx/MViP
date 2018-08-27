@@ -1,9 +1,9 @@
-package com.myatejx.viamvp.repertory;
+package com.myatejx.vipmvp.repertory;
 
 import android.content.Context;
 
 import com.myatejx.architecture.business.interfaces.INetworkInterface;
-import com.myatejx.viamvp.bean.TestBean;
+import com.myatejx.vipmvp.bean.TestBean;
 
 import java.io.IOException;
 import java.util.List;

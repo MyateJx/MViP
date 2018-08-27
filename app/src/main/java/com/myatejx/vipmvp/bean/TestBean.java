@@ -1,4 +1,4 @@
-package com.myatejx.viamvp.bean;
+package com.myatejx.vipmvp.bean;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;

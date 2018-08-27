@@ -1,4 +1,4 @@
-package com.myatejx.viamvp.business;
+package com.myatejx.vipmvp.business;
 
 import com.myatejx.architecture.business.bus.IRequest;
 

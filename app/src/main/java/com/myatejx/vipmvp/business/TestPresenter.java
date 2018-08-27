@@ -1,4 +1,4 @@
-package com.myatejx.viamvp.business;
+package com.myatejx.vipmvp.business;
 
 import android.content.Context;
 
@@ -8,8 +8,8 @@ import com.myatejx.architecture.business.bus.BaseResultCode;
 import com.myatejx.architecture.business.interfaces.IDataBaseInterface;
 import com.myatejx.architecture.business.interfaces.INetworkInterface;
 import com.myatejx.architecture.utils.RxUtils;
-import com.myatejx.viamvp.repertory.DataBaseAdapter;
-import com.myatejx.viamvp.repertory.NetworkAdapter;
+import com.myatejx.vipmvp.repertory.DataBaseAdapter;
+import com.myatejx.vipmvp.repertory.NetworkAdapter;
 
 import java.io.IOException;
 

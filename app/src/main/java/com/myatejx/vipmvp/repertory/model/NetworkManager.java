@@ -1,4 +1,4 @@
-package com.myatejx.viamvp.repertory.model;
+package com.myatejx.vipmvp.repertory.model;
 
 /**
  * @author KunMinX

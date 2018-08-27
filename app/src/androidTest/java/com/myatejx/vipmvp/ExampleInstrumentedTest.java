@@ -1,4 +1,4 @@
-package com.myatejx.viamvp;
+package com.myatejx.vipmvp;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

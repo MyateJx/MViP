@@ -1,9 +1,9 @@
-package com.myatejx.viamvp.repertory.model;
+package com.myatejx.vipmvp.repertory.model;
 
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Query;
 
-import com.myatejx.viamvp.bean.TestBean;
+import com.myatejx.vipmvp.bean.TestBean;
 
 import java.util.List;
 

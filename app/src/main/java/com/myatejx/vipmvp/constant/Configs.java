@@ -1,4 +1,4 @@
-package com.myatejx.viamvp.constant;
+package com.myatejx.vipmvp.constant;
 
 import android.os.Environment;
 

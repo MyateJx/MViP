@@ -1,11 +1,11 @@
-package com.myatejx.viamvp.repertory;
+package com.myatejx.vipmvp.repertory;
 
 import android.content.Context;
 
 import com.myatejx.architecture.business.interfaces.IDataBaseInterface;
-import com.myatejx.viamvp.bean.TestBean;
-import com.myatejx.viamvp.constant.Configs;
-import com.myatejx.viamvp.repertory.model.AppDatabase;
+import com.myatejx.vipmvp.bean.TestBean;
+import com.myatejx.vipmvp.constant.Configs;
+import com.myatejx.vipmvp.repertory.model.AppDatabase;
 
 import java.util.List;
 
