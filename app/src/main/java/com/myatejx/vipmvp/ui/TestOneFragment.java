@@ -7,11 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.myatejx.vipmvp.R;
 import com.myatejx.architecture.base.BaseFragment;
-import com.myatejx.architecture.business.bus.BaseResult;
-import com.myatejx.architecture.business.bus.BaseResultCode;
+import com.myatejx.architecture.business.bus.Result;
+import com.myatejx.vipmvp.R;
 import com.myatejx.vipmvp.business.TestBus;
+import com.myatejx.vipmvp.constant.TestResultCode;
 import com.myatejx.vipmvp.databinding.FragmentTestOneBinding;
 
 /**
@@ -47,12 +47,12 @@ public class TestOneFragment extends BaseFragment {
     }
 
     @Override
-    public void onResult(BaseResult testResult) {
+    public void onResult(Result testResult) {
         int resultCode = testResult.getResultCode();
         switch (resultCode) {
-            case BaseResultCode.GET_BEAN:
+            case TestResultCode.FAILURE:
                 break;
-            /*case BaseResultCode.GET_BEANS:
+            /*case BaseResultCode.CANCEL:
                 break;*/
             default:
         }

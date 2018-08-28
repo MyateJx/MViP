@@ -4,12 +4,12 @@ package com.myatejx.architecture.business.bus;
  * @author KunMinX
  * @date 2018/8/22
  */
-public class BaseResult {
+public class Result {
 
     private int resultCode;
     private Object resultObject;
 
-    public BaseResult(int resultCode, Object resultObject) {
+    public Result(int resultCode, Object resultObject) {
         this.resultCode = resultCode;
         this.resultObject = resultObject;
     }

@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class BaseBus {
 
-//    private static I sIRequest;
+    private static IRequest sIRequest;
     private static List<IResponse> sIResponses = new ArrayList<>();
 
     public static void registerResponse(IResponse iResponse) {
@@ -24,7 +24,7 @@ public class BaseBus {
         }
     }
 
-    public static void onResult(BaseResult testResult) {
+    public static void onResult(Result testResult) {
         for (IResponse iResponse : sIResponses) {
             iResponse.onResult(testResult);
         }
@@ -34,27 +34,16 @@ public class BaseBus {
         sIResponses.clear();
     }
 
-    /*public static <I> void registerIRequest(I iRequest) {
+    public static void registerIRequest(IRequest iRequest) {
         sIRequest = iRequest;
-    }*/
-
-    /*public static void unregisterIRequest() {
-        sIRequest = null;
-    }*/
-
-    /*public static IRequest getIRequest() {
-        return sIRequest;
-    }*/
-
-    /*public static void requestBean() {
-        if (sIRequest != null) {
-            sIRequest.requestBean();
-        }
     }
 
-    public static void requestBeans() {
-        if (sIRequest != null) {
-            sIRequest.requestBeans();
-        }
-    }*/
+    public static void unregisterIRequest() {
+        sIRequest = null;
+    }
+
+    protected static IRequest getIRequest() {
+        return sIRequest;
+    }
+
 }

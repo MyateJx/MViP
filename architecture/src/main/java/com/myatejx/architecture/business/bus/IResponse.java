@@ -6,5 +6,5 @@ package com.myatejx.architecture.business.bus;
  */
 public interface IResponse {
 
-    void onResult(BaseResult testResult);
+    void onResult(Result testResult);
 }

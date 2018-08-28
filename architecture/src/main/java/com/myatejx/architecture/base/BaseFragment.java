@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.myatejx.architecture.business.bus.BaseBus;
-import com.myatejx.architecture.business.bus.BaseResult;
+import com.myatejx.architecture.business.bus.Result;
 import com.myatejx.architecture.business.bus.IResponse;
 
 /**
@@ -26,7 +26,7 @@ public class BaseFragment extends SupportFragment implements IResponse {
     }
 
     @Override
-    public void onResult(BaseResult testResult) {
+    public void onResult(Result testResult) {
 
     }
 }

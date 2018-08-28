@@ -8,21 +8,15 @@ import com.myatejx.architecture.business.bus.BaseBus;
  */
 public class TestBus extends BaseBus {
 
-    private static ITestRequest sIRequest;
-
-    public static void registerIRequest(ITestRequest iRequest) {
-        sIRequest = iRequest;
-    }
-
     public static void requestBean() {
-        if (sIRequest != null) {
-            sIRequest.requestBean();
+        if (getIRequest() != null) {
+            ((ITestRequest) getIRequest()).requestBean();
         }
     }
 
     public static void requestBeans() {
-        if (sIRequest != null) {
-            sIRequest.requestBeans();
+        if (getIRequest() != null) {
+            ((ITestRequest) getIRequest()).requestBeans();
         }
     }
 }

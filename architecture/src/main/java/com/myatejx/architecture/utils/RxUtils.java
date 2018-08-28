@@ -1,5 +1,7 @@
 package com.myatejx.architecture.utils;
 
+import com.myatejx.architecture.business.bus.Result;
+
 import java.io.IOException;
 
 import io.reactivex.Observable;
@@ -10,7 +12,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class RxUtils {
+public class RxUtils<T extends Result> {
 
     private static RxUtils sRxUtils;
 

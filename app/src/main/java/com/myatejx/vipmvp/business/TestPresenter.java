@@ -3,11 +3,11 @@ package com.myatejx.vipmvp.business;
 import android.content.Context;
 
 import com.myatejx.architecture.business.bus.BaseBus;
-import com.myatejx.architecture.business.bus.BaseResult;
-import com.myatejx.architecture.business.bus.BaseResultCode;
+import com.myatejx.architecture.business.bus.Result;
 import com.myatejx.architecture.business.interfaces.IDataBaseInterface;
 import com.myatejx.architecture.business.interfaces.INetworkInterface;
 import com.myatejx.architecture.utils.RxUtils;
+import com.myatejx.vipmvp.constant.TestResultCode;
 import com.myatejx.vipmvp.repertory.DataBaseAdapter;
 import com.myatejx.vipmvp.repertory.NetworkAdapter;
 
@@ -41,7 +41,7 @@ public class TestPresenter implements ITestRequest {
 
             @Override
             public void onResult(Throwable throwable, Object[] o) {
-                BaseResult testResult = new BaseResult(BaseResultCode.GET_BEAN, null);
+                Result testResult = new Result(TestResultCode.CANCELED, null);
                 BaseBus.onResult(testResult);
             }
         });
@@ -57,7 +57,7 @@ public class TestPresenter implements ITestRequest {
 
             @Override
             public void onResult(Throwable throwable, Object[] o) {
-                BaseResult testResult = new BaseResult(BaseResultCode.GET_BEANS, null);
+                Result testResult = new Result(TestResultCode.CANCELED, null);
                 BaseBus.onResult(testResult);
             }
         });
