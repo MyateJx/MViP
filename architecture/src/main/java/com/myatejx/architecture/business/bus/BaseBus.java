@@ -10,22 +10,22 @@ import java.util.List;
  */
 public class BaseBus {
 
-    private static HashMap<BusinessType, IRequest> sRequestMap = new HashMap<>();
-    private static HashMap<BusinessType, List<IResponse>> sResponseMap = new HashMap<>();
+    private static HashMap<String, IRequest> sRequestMap = new HashMap<>();
+    private static HashMap<String, List<IResponse>> sResponseMap = new HashMap<>();
 
-    public static void registerRequestHandle(BusinessType requestType, IRequest request) {
+    public static void registerRequestHandle(String requestType, IRequest request) {
         if (requestType != null && request != null && sRequestMap.get(requestType) == null) {
             sRequestMap.put(requestType, request);
         }
     }
 
-    public static void unregisterRequestHandle(BusinessType requestType) {
+    public static void unregisterRequestHandle(String requestType) {
         if (requestType != null && sRequestMap.get(requestType) != null) {
             sRequestMap.remove(requestType);
         }
     }
 
-    public static void registerResponseObserve(BusinessType requestType, IResponse response) {
+    public static void registerResponseObserve(String requestType, IResponse response) {
         if (response != null && requestType != null) {
             if (sResponseMap.get(requestType) == null) {
                 List<IResponse> responses = new ArrayList<>();
@@ -37,7 +37,7 @@ public class BaseBus {
         }
     }
 
-    public static void unregisterResponseObserve(BusinessType requestType, IResponse response) {
+    public static void unregisterResponseObserve(String requestType, IResponse response) {
         if (response != null && requestType != null && sResponseMap.get(requestType) != null) {
             if (sResponseMap.get(requestType).contains(response)) {
                 sResponseMap.get(requestType).remove(response);
@@ -50,11 +50,11 @@ public class BaseBus {
         sResponseMap.clear();
     }
 
-    public static IRequest request(BusinessType requestType) {
+    public static IRequest request(String requestType) {
         return sRequestMap.get(requestType);
     }
 
-    public static void response(BusinessType requestType, Result result) {
+    public static void response(String requestType, Result result) {
         List<IResponse> responseList = sResponseMap.get(requestType);
         if (responseList != null && responseList.size() > 0) {
             for (IResponse response : responseList) {

@@ -9,11 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.myatejx.architecture.business.bus.BaseBus;
-import com.myatejx.architecture.business.bus.BusinessType;
 import com.myatejx.architecture.business.bus.IResponse;
 import com.myatejx.architecture.business.bus.Result;
 import com.myatejx.vipmvp.R;
 import com.myatejx.vipmvp.business.ITestRequest;
+import com.myatejx.vipmvp.constant.BusinessType;
 import com.myatejx.vipmvp.constant.TestResultCode;
 import com.myatejx.vipmvp.databinding.FragmentTestTwoBinding;
 
@@ -37,8 +37,8 @@ public class TestTwoFragment extends Fragment implements IResponse {
         View view = inflater.inflate(R.layout.fragment_test_two, container, false);
         mBinding = FragmentTestTwoBinding.bind(view);
         setHasOptionsMenu(true);
-        BaseBus.registerResponseObserve(BusinessType.DIARY, this);
-        mRequest = (ITestRequest) BaseBus.request(BusinessType.DIARY);
+        BaseBus.registerResponseObserve(BusinessType.DIARY.name(), this);
+        mRequest = (ITestRequest) BaseBus.request(BusinessType.DIARY.name());
         return view;
     }
 
@@ -55,7 +55,7 @@ public class TestTwoFragment extends Fragment implements IResponse {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        BaseBus.unregisterResponseObserve(BusinessType.DIARY, this);
+        BaseBus.unregisterResponseObserve(BusinessType.DIARY.name(), this);
     }
 
     @Override

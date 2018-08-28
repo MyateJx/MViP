@@ -6,10 +6,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.myatejx.architecture.business.bus.BaseBus;
-import com.myatejx.architecture.business.bus.BusinessType;
 import com.myatejx.architecture.utils.PermissionUtils;
 import com.myatejx.vipmvp.R;
 import com.myatejx.vipmvp.business.TestPresenter;
+import com.myatejx.vipmvp.constant.BusinessType;
 import com.myatejx.vipmvp.databinding.ActivityTestBinding;
 
 /**
@@ -38,7 +38,7 @@ public class TestActivity extends AppCompatActivity {
             @Override
             public void onAllowedPermissions() {
                 TestPresenter presenter = new TestPresenter();
-                BaseBus.registerRequestHandle(BusinessType.DIARY, presenter);
+                BaseBus.registerRequestHandle(BusinessType.DIARY.name(), presenter);
                 initView();
             }
 

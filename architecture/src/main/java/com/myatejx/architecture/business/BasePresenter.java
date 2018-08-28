@@ -1,7 +1,6 @@
 package com.myatejx.architecture.business;
 
 import com.myatejx.architecture.business.bus.BaseBus;
-import com.myatejx.architecture.business.bus.BusinessType;
 import com.myatejx.architecture.business.bus.Result;
 import com.myatejx.architecture.business.bus.ResultCode;
 
@@ -17,7 +16,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class BasePresenter {
 
-    public void handleRequest(final BusinessType businessType, final int resultCode, final IAsync iAsnycTask) {
+    public void handleRequest(final String businessType, final int resultCode, final IAsync iAsnycTask) {
         Observable.create(new ObservableOnSubscribe<Object>() {
             @Override
             public void subscribe(ObservableEmitter<Object> e) {

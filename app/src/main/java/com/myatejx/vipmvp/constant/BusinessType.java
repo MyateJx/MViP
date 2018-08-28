@@ -1,6 +1,6 @@
 package com.myatejx.vipmvp.constant;
 
-public enum BusinessType {
+public enum  BusinessType {
     DIARY,
     USER,
     PAY
