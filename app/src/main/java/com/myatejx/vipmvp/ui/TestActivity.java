@@ -3,11 +3,12 @@ package com.myatejx.vipmvp.ui;
 import android.Manifest;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
-import com.myatejx.vipmvp.R;
-import com.myatejx.architecture.base.BaseActivity;
+import com.myatejx.architecture.business.bus.BaseBus;
+import com.myatejx.architecture.business.bus.BusinessType;
 import com.myatejx.architecture.utils.PermissionUtils;
-import com.myatejx.vipmvp.business.TestBus;
+import com.myatejx.vipmvp.R;
 import com.myatejx.vipmvp.business.TestPresenter;
 import com.myatejx.vipmvp.databinding.ActivityTestBinding;
 
@@ -15,7 +16,7 @@ import com.myatejx.vipmvp.databinding.ActivityTestBinding;
  * @author KunMinX
  * @date 2018/8/21
  */
-public class TestActivity extends BaseActivity {
+public class TestActivity extends AppCompatActivity {
 
     private ActivityTestBinding mBinding;
 
@@ -27,7 +28,9 @@ public class TestActivity extends BaseActivity {
     }
 
     private void initView() {
-        loadRootFragment(R.id.fragment_container, TestOneFragment.newInstance());
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.fragment_container, TestOneFragment.newInstance())
+                .addToBackStack(null).commit();
     }
 
     private void initModel() {
@@ -35,7 +38,7 @@ public class TestActivity extends BaseActivity {
             @Override
             public void onAllowedPermissions() {
                 TestPresenter presenter = new TestPresenter();
-                TestBus.registerIRequest(presenter);
+                BaseBus.registerRequestHandle(BusinessType.DIARY, presenter);
                 initView();
             }
 
@@ -49,7 +52,6 @@ public class TestActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        TestBus.registerIRequest(null);
-        TestBus.unregisterAllResponses();
+        BaseBus.clearAllRegister();
     }
 }

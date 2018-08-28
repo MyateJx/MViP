@@ -1,4 +1,4 @@
-package com.myatejx.architecture.business.interfaces;
+package com.myatejx.vipmvp.repertory;
 
 import android.content.Context;
 

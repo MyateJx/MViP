@@ -2,7 +2,6 @@ package com.myatejx.vipmvp.repertory;
 
 import android.content.Context;
 
-import com.myatejx.architecture.business.interfaces.IDataBaseInterface;
 import com.myatejx.vipmvp.bean.TestBean;
 import com.myatejx.vipmvp.constant.Configs;
 import com.myatejx.vipmvp.repertory.model.AppDatabase;

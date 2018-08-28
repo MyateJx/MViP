@@ -1,6 +1,7 @@
 package com.myatejx.architecture.business.bus;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -9,41 +10,57 @@ import java.util.List;
  */
 public class BaseBus {
 
-    private static IRequest sIRequest;
-    private static List<IResponse> sIResponses = new ArrayList<>();
+    private static HashMap<BusinessType, IRequest> sRequestMap = new HashMap<>();
+    private static HashMap<BusinessType, List<IResponse>> sResponseMap = new HashMap<>();
 
-    public static void registerResponse(IResponse iResponse) {
-        if (!sIResponses.contains(iResponse)) {
-            sIResponses.add(iResponse);
+    public static void registerRequestHandle(BusinessType requestType, IRequest request) {
+        if (requestType != null && request != null && sRequestMap.get(requestType) == null) {
+            sRequestMap.put(requestType, request);
         }
     }
 
-    public static void unregisterResponse(IResponse iResponse) {
-        if (sIResponses.contains(iResponse)) {
-            sIResponses.remove(iResponse);
+    public static void unregisterRequestHandle(BusinessType requestType) {
+        if (requestType != null && sRequestMap.get(requestType) != null) {
+            sRequestMap.remove(requestType);
         }
     }
 
-    public static void onResult(Result testResult) {
-        for (IResponse iResponse : sIResponses) {
-            iResponse.onResult(testResult);
+    public static void registerResponseObserve(BusinessType requestType, IResponse response) {
+        if (response != null && requestType != null) {
+            if (sResponseMap.get(requestType) == null) {
+                List<IResponse> responses = new ArrayList<>();
+                responses.add(response);
+                sResponseMap.put(requestType, responses);
+            } else {
+                sResponseMap.get(requestType).add(response);
+            }
         }
     }
 
-    public static void unregisterAllResponses() {
-        sIResponses.clear();
+    public static void unregisterResponseObserve(BusinessType requestType, IResponse response) {
+        if (response != null && requestType != null && sResponseMap.get(requestType) != null) {
+            if (sResponseMap.get(requestType).contains(response)) {
+                sResponseMap.get(requestType).remove(response);
+            }
+        }
     }
 
-    public static void registerIRequest(IRequest iRequest) {
-        sIRequest = iRequest;
+    public static void clearAllRegister() {
+        sRequestMap.clear();
+        sResponseMap.clear();
     }
 
-    public static void unregisterIRequest() {
-        sIRequest = null;
+    public static IRequest request(BusinessType requestType) {
+        return sRequestMap.get(requestType);
     }
 
-    protected static IRequest getIRequest() {
-        return sIRequest;
+    public static void response(BusinessType requestType, Result result) {
+        List<IResponse> responseList = sResponseMap.get(requestType);
+        if (responseList != null && responseList.size() > 0) {
+            for (IResponse response : responseList) {
+                response.onResult(result);
+            }
+        }
     }
 
 }
