@@ -4,7 +4,7 @@ import android.Manifest;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 
-import com.myatejx.architecture.R;
+import com.myatejx.vipmvp.R;
 import com.myatejx.architecture.base.BaseActivity;
 import com.myatejx.architecture.utils.PermissionUtils;
 import com.myatejx.vipmvp.business.TestBus;

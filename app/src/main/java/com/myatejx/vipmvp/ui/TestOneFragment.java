@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.myatejx.architecture.R;
+import com.myatejx.vipmvp.R;
 import com.myatejx.architecture.base.BaseFragment;
 import com.myatejx.architecture.business.bus.BaseResult;
 import com.myatejx.architecture.business.bus.BaseResultCode;
