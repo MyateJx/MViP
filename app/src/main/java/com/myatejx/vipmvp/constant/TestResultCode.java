@@ -8,10 +8,10 @@ import com.myatejx.architecture.business.bus.ResultCode;
  */
 public class TestResultCode extends ResultCode {
 
-    public static final int GOT_LIST = 0x0004;
-    public static final int GOT_ENTITY = 0x0008;
-    public static final int INSERTED = 0x0010;
-    public static final int UPDATED = 0x0020;
-    public static final int DELETED = 0x0040;
+    public static final int GOT_LIST = 0x0001;
+    public static final int GOT_ENTITY = 0x0002;
+    public static final int INSERTED = 0x004;
+    public static final int UPDATED = 0x008;
+    public static final int DELETED = 0x0010;
 
 }
