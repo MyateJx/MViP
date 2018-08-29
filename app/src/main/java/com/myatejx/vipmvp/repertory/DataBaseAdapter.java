@@ -3,7 +3,7 @@ package com.myatejx.vipmvp.repertory;
 import android.content.Context;
 
 import com.myatejx.vipmvp.bean.TestBean;
-import com.myatejx.vipmvp.constant.Configs;
+import com.myatejx.vipmvp.business.constant.Configs;
 import com.myatejx.vipmvp.repertory.model.AppDatabase;
 
 import java.util.List;

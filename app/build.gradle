@@ -48,4 +48,6 @@ dependencies {
     compileOnly deps.rxjava
     compileOnly deps.okhttp
     implementation deps.glide
+
 }
+

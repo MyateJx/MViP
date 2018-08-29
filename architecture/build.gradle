@@ -28,6 +28,10 @@ android {
 
 }
 
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation 'junit:junit:4.12'
@@ -46,4 +50,5 @@ dependencies {
     implementation deps.rxjava
     implementation deps.okhttp
     implementation deps.glide
+
 }

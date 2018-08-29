@@ -1,4 +1,4 @@
-package com.myatejx.vipmvp.constant;
+package com.myatejx.vipmvp.business.constant;
 
 import android.os.Environment;
 

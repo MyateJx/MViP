@@ -16,11 +16,13 @@ public class TestBean {
     private Long id;
     private String title;
     private String date;
+    private String imgUrl;
 
-    public TestBean(Long id, String title, String date) {
+    public TestBean(Long id, String title, String date, String imgUrl) {
         this.id = id;
         this.title = title;
         this.date = date;
+        this.imgUrl = imgUrl;
     }
 
     public Long getId() {
@@ -45,5 +47,13 @@ public class TestBean {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 }

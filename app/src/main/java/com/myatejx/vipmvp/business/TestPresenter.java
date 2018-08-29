@@ -3,8 +3,8 @@ package com.myatejx.vipmvp.business;
 import android.content.Context;
 
 import com.myatejx.architecture.business.BasePresenter;
-import com.myatejx.vipmvp.constant.BusinessType;
-import com.myatejx.vipmvp.constant.TestResultCode;
+import com.myatejx.vipmvp.business.constant.BusinessType;
+import com.myatejx.vipmvp.business.constant.TestResultCode;
 import com.myatejx.vipmvp.repertory.DataBaseAdapter;
 import com.myatejx.vipmvp.repertory.IDataBaseInterface;
 

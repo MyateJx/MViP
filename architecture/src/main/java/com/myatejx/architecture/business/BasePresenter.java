@@ -14,6 +14,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
+/**
+ * @author KunMinX
+ * @date 2018/8/22
+ */
 public class BasePresenter {
 
     public void handleRequest(final String businessType, final int resultCode, final IAsync iAsnycTask) {

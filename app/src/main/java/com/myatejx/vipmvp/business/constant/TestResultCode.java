@@ -1,4 +1,4 @@
-package com.myatejx.vipmvp.constant;
+package com.myatejx.vipmvp.business.constant;
 
 import com.myatejx.architecture.business.bus.ResultCode;
 

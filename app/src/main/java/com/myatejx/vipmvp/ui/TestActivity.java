@@ -9,7 +9,7 @@ import com.myatejx.architecture.business.bus.BaseBus;
 import com.myatejx.architecture.utils.PermissionUtils;
 import com.myatejx.vipmvp.R;
 import com.myatejx.vipmvp.business.TestPresenter;
-import com.myatejx.vipmvp.constant.BusinessType;
+import com.myatejx.vipmvp.business.constant.BusinessType;
 import com.myatejx.vipmvp.databinding.ActivityTestBinding;
 
 /**
@@ -29,7 +29,7 @@ public class TestActivity extends AppCompatActivity {
 
     private void initView() {
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.fragment_container, TestOneFragment.newInstance())
+                .add(R.id.fragment_container, TestListFragment.newInstance())
                 .addToBackStack(null).commit();
     }
 
