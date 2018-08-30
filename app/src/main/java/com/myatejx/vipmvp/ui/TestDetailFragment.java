@@ -28,6 +28,7 @@ public class TestDetailFragment extends Fragment implements IResponse {
     private ITestRequest mRequest;
     private final static String TITLE = "TITLE";
     private String mTitle;
+    private boolean mIsNew;
 
     public static TestDetailFragment newInstance(String title) {
         TestDetailFragment fragment = new TestDetailFragment();
@@ -59,18 +60,24 @@ public class TestDetailFragment extends Fragment implements IResponse {
         mTitle = getArguments().getString(TITLE);
         if (!TextUtils.isEmpty(mTitle)) {
             mBinding.et.setText(mTitle);
+        } else {
+            mIsNew = true;
         }
     }
 
     public class ClickProxy {
         public void save() {
             if (!mBinding.et.getText().toString().equals(mTitle)) {
-
+                if (mIsNew) {
+                    mRequest.requestInsert();
+                } else {
+                    mRequest.requestUpdate();
+                }
             }
         }
 
         public void delete() {
-            mRequest.requestBean();
+            mRequest.requestDelete();
         }
     }
 

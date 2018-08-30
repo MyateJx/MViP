@@ -8,7 +8,20 @@ import com.myatejx.architecture.business.bus.IRequest;
  */
 public interface ITestRequest extends IRequest {
 
-    void requestBean();
+    void requestEntity();
 
-    void requestBeans();
+    void requestList();
+
+    void requestInsert();
+
+    void requestInserts();
+
+    void requestUpdate();
+
+    void requestUpdates();
+
+    void requestDelete();
+
+    void requestDeletes();
+
 }

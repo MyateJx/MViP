@@ -65,27 +65,27 @@ public class TestListFragment extends Fragment implements IResponse {
             }
 
             @Override
-            protected void onBindItem(AdapterTestListBinding binding, TestBean item, int position) {
+            protected void onBindItem(AdapterTestListBinding binding, final TestBean item, int position) {
                 binding.tvTitle.setText(item.getTitle());
                 Glide.with(getContext()).load(item.getImgUrl()).into(binding.ivThumb);
                 binding.getRoot().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         getActivity().getSupportFragmentManager().beginTransaction()
-                                .add(R.id.fragment_container, TestDetailFragment.newInstance())
+                                .add(R.id.fragment_container, TestDetailFragment.newInstance(item.getTitle()))
                                 .addToBackStack(null).commit();
                     }
                 });
             }
         };
         mBinding.rv.setAdapter(mAdapter);
-        mRequest.requestBean();
+        mRequest.requestList();
     }
 
     public class ClickProxy {
         public void newTest() {
             getActivity().getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragment_container, TestDetailFragment.newInstance())
+                    .add(R.id.fragment_container, TestDetailFragment.newInstance(""))
                     .addToBackStack(null).commit();
         }
     }

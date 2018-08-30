@@ -27,7 +27,7 @@ public class TestPresenter extends BasePresenter implements ITestRequest {
     }
 
     @Override
-    public void requestBean() {
+    public void requestEntity() {
         handleRequest(BusinessType.DIARY.name(), new IAsync() {
             @Override
             public Result onExecute(ObservableEmitter<Result> e) throws IOException {
@@ -37,7 +37,7 @@ public class TestPresenter extends BasePresenter implements ITestRequest {
     }
 
     @Override
-    public void requestBeans() {
+    public void requestList() {
         handleRequest(BusinessType.DIARY.name(), new IAsync() {
             @Override
             public Result onExecute(ObservableEmitter<Result> e) throws IOException {
