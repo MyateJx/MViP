@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,9 +26,14 @@ public class TestDetailFragment extends Fragment implements IResponse {
 
     private FragmentTestDetailBinding mBinding;
     private ITestRequest mRequest;
+    private final static String TITLE = "TITLE";
+    private String mTitle;
 
-    public static TestDetailFragment newInstance() {
+    public static TestDetailFragment newInstance(String title) {
         TestDetailFragment fragment = new TestDetailFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(TITLE, title);
+        fragment.setArguments(bundle);
         return fragment;
     }
 
@@ -50,16 +56,21 @@ public class TestDetailFragment extends Fragment implements IResponse {
     }
 
     private void initViews() {
-        mRequest.requestBean();
+        mTitle = getArguments().getString(TITLE);
+        if (!TextUtils.isEmpty(mTitle)) {
+            mBinding.et.setText(mTitle);
+        }
     }
 
     public class ClickProxy {
         public void save() {
+            if (!mBinding.et.getText().toString().equals(mTitle)) {
 
+            }
         }
 
         public void delete() {
-
+            mRequest.requestBean();
         }
     }
 

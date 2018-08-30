@@ -68,6 +68,14 @@ public class TestListFragment extends Fragment implements IResponse {
             protected void onBindItem(AdapterTestListBinding binding, TestBean item, int position) {
                 binding.tvTitle.setText(item.getTitle());
                 Glide.with(getContext()).load(item.getImgUrl()).into(binding.ivThumb);
+                binding.getRoot().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        getActivity().getSupportFragmentManager().beginTransaction()
+                                .add(R.id.fragment_container, TestDetailFragment.newInstance())
+                                .addToBackStack(null).commit();
+                    }
+                });
             }
         };
         mBinding.rv.setAdapter(mAdapter);
