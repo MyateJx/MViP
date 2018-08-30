@@ -20,10 +20,10 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class BasePresenter {
 
-    public void handleRequest(final String businessType, final int resultCode, final IAsync iAsnycTask) {
-        Observable.create(new ObservableOnSubscribe<Object>() {
+    protected void handleRequest(final String businessType, final IAsync iAsnycTask) {
+        Observable.create(new ObservableOnSubscribe<Result>() {
             @Override
-            public void subscribe(ObservableEmitter<Object> e) {
+            public void subscribe(ObservableEmitter<Result> e) {
                 try {
                     if (iAsnycTask != null) {
                         e.onNext(iAsnycTask.onExecute(e));
@@ -34,16 +34,15 @@ public class BasePresenter {
             }
         }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<Object>() {
+                .subscribe(new Observer<Result>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(Object value) {
-                        Result result = new Result(resultCode, value);
-                        BaseBus.response(businessType, result);
+                    public void onNext(Result value) {
+                        BaseBus.response(businessType, value);
                     }
 
                     @Override
@@ -60,7 +59,7 @@ public class BasePresenter {
     }
 
     public interface IAsync {
-        Object onExecute(ObservableEmitter<Object> e) throws IOException;
+        Result onExecute(ObservableEmitter<Result> e) throws IOException;
     }
 
 }

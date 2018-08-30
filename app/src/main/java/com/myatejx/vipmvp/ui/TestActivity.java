@@ -38,6 +38,7 @@ public class TestActivity extends AppCompatActivity {
             @Override
             public void onAllowedPermissions() {
                 TestPresenter presenter = new TestPresenter();
+                presenter.init(getApplicationContext());
                 BaseBus.registerRequestHandle(BusinessType.DIARY.name(), presenter);
                 initView();
             }

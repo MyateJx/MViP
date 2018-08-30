@@ -3,6 +3,7 @@ package com.myatejx.vipmvp.business;
 import android.content.Context;
 
 import com.myatejx.architecture.business.BasePresenter;
+import com.myatejx.architecture.business.bus.Result;
 import com.myatejx.vipmvp.business.constant.BusinessType;
 import com.myatejx.vipmvp.business.constant.TestResultCode;
 import com.myatejx.vipmvp.repertory.DataBaseAdapter;
@@ -27,20 +28,20 @@ public class TestPresenter extends BasePresenter implements ITestRequest {
 
     @Override
     public void requestBean() {
-        handleRequest(BusinessType.DIARY.name(), TestResultCode.GOT_ENTITY, new IAsync() {
+        handleRequest(BusinessType.DIARY.name(), new IAsync() {
             @Override
-            public Object onExecute(ObservableEmitter<Object> e) throws IOException {
-                return null;
+            public Result onExecute(ObservableEmitter<Result> e) throws IOException {
+                return new Result(TestResultCode.GOT_ENTITY, null);
             }
         });
     }
 
     @Override
     public void requestBeans() {
-        handleRequest(BusinessType.DIARY.name(), TestResultCode.GOT_LIST, new IAsync() {
+        handleRequest(BusinessType.DIARY.name(), new IAsync() {
             @Override
-            public Object onExecute(ObservableEmitter<Object> e) throws IOException {
-                return null;
+            public Result onExecute(ObservableEmitter<Result> e) throws IOException {
+                return new Result(TestResultCode.GOT_LIST, null);
             }
         });
     }
