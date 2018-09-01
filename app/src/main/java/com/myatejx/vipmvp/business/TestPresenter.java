@@ -45,4 +45,34 @@ public class TestPresenter extends BasePresenter implements ITestRequest {
             }
         });
     }
+
+    @Override
+    public void requestInsert() {
+
+    }
+
+    @Override
+    public void requestInserts() {
+
+    }
+
+    @Override
+    public void requestUpdate() {
+
+    }
+
+    @Override
+    public void requestUpdates() {
+
+    }
+
+    @Override
+    public void requestDelete() {
+
+    }
+
+    @Override
+    public void requestDeletes() {
+
+    }
 }
