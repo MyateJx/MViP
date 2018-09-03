@@ -24,25 +24,56 @@ public class TestPresenter extends BasePresenter implements ITestRequest {
     public void init(Context context) {
         mDataBase = new DataBaseAdapter();
         mDataBase.init(context);
+        setBusinessType(BusinessType.DIARY.name());
     }
 
     @Override
     public void requestEntity() {
-        handleRequest(BusinessType.DIARY.name(), new IAsync() {
+        handleRequest(new IAsync() {
             @Override
             public Result onExecute(ObservableEmitter<Result> e) throws IOException {
-                return new Result(TestResultCode.GOT_ENTITY, null);
+                return new Result(getBusinessType(), TestResultCode.GOT_ENTITY, null);
             }
         });
     }
 
     @Override
     public void requestList() {
-        handleRequest(BusinessType.DIARY.name(), new IAsync() {
+        handleRequest(new IAsync() {
             @Override
             public Result onExecute(ObservableEmitter<Result> e) throws IOException {
-                return new Result(TestResultCode.GOT_LIST, null);
+                return new Result(getBusinessType(), TestResultCode.GOT_LIST, null);
             }
         });
+    }
+
+    @Override
+    public void requestInsert() {
+
+    }
+
+    @Override
+    public void requestInserts() {
+
+    }
+
+    @Override
+    public void requestUpdate() {
+
+    }
+
+    @Override
+    public void requestUpdates() {
+
+    }
+
+    @Override
+    public void requestDelete() {
+
+    }
+
+    @Override
+    public void requestDeletes() {
+
     }
 }

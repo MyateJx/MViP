@@ -19,4 +19,7 @@ public interface TestDao {
 
     @Query("SELECT * FROM TestBean WHERE id=:id")
     TestBean getBean(int id);
+
+
+
 }

@@ -20,6 +20,29 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class BasePresenter {
 
+    private String businessType;
+
+    public String getBusinessType() {
+        return businessType;
+    }
+
+    protected void setBusinessType(String businessType) {
+        this.businessType = businessType;
+    }
+
+    /**
+     * 在onExcute期间，需要回传进度progress等时使用。
+     *
+     * @param result
+     */
+    protected void sendMessage(Result result) {
+        BaseBus.response(businessType, result);
+    }
+
+    protected void handleRequest(IAsync iAsync) {
+        handleRequest(businessType, iAsync);
+    }
+
     protected void handleRequest(final String businessType, final IAsync iAsnycTask) {
         Observable.create(new ObservableOnSubscribe<Result>() {
             @Override
@@ -47,7 +70,7 @@ public class BasePresenter {
 
                     @Override
                     public void onError(Throwable e) {
-                        Result result = new Result(ResultCode.FAILURE, e.toString());
+                        Result result = new Result(businessType, ResultCode.FAILURE, e.toString());
                         BaseBus.response(businessType, result);
                     }
 
