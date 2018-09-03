@@ -1,8 +1,11 @@
 package com.myatejx.architecture.business;
 
+import android.content.Context;
+
+import com.myatejx.architecture.business.bus.BaseBus;
+import com.myatejx.architecture.business.bus.IRequest;
 import com.myatejx.architecture.business.bus.Result;
 import com.myatejx.architecture.business.bus.ResultCode;
-import com.myatejx.architecture.business.bus.BaseBus;
 
 import java.io.IOException;
 
@@ -18,7 +21,15 @@ import io.reactivex.schedulers.Schedulers;
  * @author KunMinX
  * @date 2018/8/22
  */
-public class BasePresenter {
+public class BasePresenter<Q extends IRequest> {
+
+    private BaseBus<Q> mBaseBus;
+    protected Context mContext;
+
+    public BasePresenter(Context context, BaseBus<Q> baseBus) {
+        this.mContext = context;
+        this.mBaseBus = baseBus;
+    }
 
     /**
      * 在onExcute期间，需要回传进度progress等时使用。
@@ -67,13 +78,13 @@ public class BasePresenter {
 
                     @Override
                     public void onNext(Result value) {
-                        BaseBus.getInstance().response(value);
+                        mBaseBus.response(value);
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         Result result = new Result(ResultCode.FAILURE, e.toString());
-                        BaseBus.getInstance().response(result);
+                        mBaseBus.response(result);
                     }
 
                     @Override

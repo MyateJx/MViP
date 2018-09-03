@@ -3,6 +3,7 @@ package com.myatejx.vipmvp.business;
 import android.content.Context;
 
 import com.myatejx.architecture.business.BasePresenter;
+import com.myatejx.architecture.business.bus.BaseBus;
 import com.myatejx.architecture.business.bus.Result;
 import com.myatejx.vipmvp.business.constant.TestResultCode;
 import com.myatejx.vipmvp.repertory.DataBaseAdapter;
@@ -20,7 +21,8 @@ public class TestPresenter extends BasePresenter implements ITestRequest {
 
     private IDataBaseInterface mDataBase;
 
-    public TestPresenter(Context context, String businessType) {
+    public TestPresenter(Context context, BaseBus baseBus) {
+        super(context, baseBus);
         mDataBase = new DataBaseAdapter();
         mDataBase.init(context);
     }
@@ -30,7 +32,7 @@ public class TestPresenter extends BasePresenter implements ITestRequest {
         handleRequest(new IAsync() {
             @Override
             public Result onExecute(ObservableEmitter<Result> e) throws IOException {
-                return new Result( TestResultCode.GOT_ENTITY, null);
+                return new Result(TestResultCode.GOT_ENTITY, null);
             }
         });
     }
@@ -40,7 +42,7 @@ public class TestPresenter extends BasePresenter implements ITestRequest {
         handleRequest(new IAsync() {
             @Override
             public Result onExecute(ObservableEmitter<Result> e) throws IOException {
-                return new Result( TestResultCode.GOT_LIST, null);
+                return new Result(TestResultCode.GOT_LIST, null);
             }
         });
     }
