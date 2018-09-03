@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.myatejx.architecture.business.bus.BaseBus;
+import com.myatejx.architecture.business.bus.VipBus;
 import com.myatejx.architecture.business.bus.IResponse;
 import com.myatejx.architecture.business.bus.Result;
 import com.myatejx.vipmvp.R;
@@ -45,8 +45,8 @@ public class TestDetailFragment extends Fragment implements IResponse {
         mBinding = FragmentTestDetailBinding.bind(view);
         mBinding.setClickProxy(new ClickProxy());
         setHasOptionsMenu(true);
-        BaseBus.registerResponseObserve(BusinessType.DIARY.name(), this);
-        mRequest = (ITestRequest) BaseBus.request(BusinessType.DIARY.name());
+        VipBus.registerResponseObserve(BusinessType.DIARY.name(), this);
+        mRequest = (ITestRequest) VipBus.request(BusinessType.DIARY.name());
         return view;
     }
 
@@ -102,6 +102,6 @@ public class TestDetailFragment extends Fragment implements IResponse {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        BaseBus.unregisterResponseObserve(BusinessType.DIARY.name(), this);
+        VipBus.unregisterResponseObserve(BusinessType.DIARY.name(), this);
     }
 }

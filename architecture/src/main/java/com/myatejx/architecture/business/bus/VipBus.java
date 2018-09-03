@@ -1,5 +1,7 @@
 package com.myatejx.architecture.business.bus;
 
+import android.text.TextUtils;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -8,14 +10,14 @@ import java.util.List;
  * @author KunMinX
  * @date 2018/8/22
  */
-public class BaseBus {
+public class VipBus {
 
     private static HashMap<String, IRequest> sRequestMap = new HashMap<>();
     private static HashMap<String, List<IResponse>> sResponseMap = new HashMap<>();
 
-    public static void registerRequestHandle(String requestType, IRequest request) {
-        if (requestType != null && request != null && sRequestMap.get(requestType) == null) {
-            sRequestMap.put(requestType, request);
+    public static void registerRequestHandle(IRequest request) {
+        if (request != null && TextUtils.isEmpty(request.getBusinessType()) && sRequestMap.get(request.getBusinessType()) == null) {
+            sRequestMap.put(request.getBusinessType(), request);
         }
     }
 

@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.myatejx.architecture.business.BasePresenter;
 import com.myatejx.architecture.business.bus.Result;
-import com.myatejx.vipmvp.business.constant.BusinessType;
 import com.myatejx.vipmvp.business.constant.TestResultCode;
 import com.myatejx.vipmvp.repertory.DataBaseAdapter;
 import com.myatejx.vipmvp.repertory.IDataBaseInterface;
@@ -21,10 +20,10 @@ public class TestPresenter extends BasePresenter implements ITestRequest {
 
     private IDataBaseInterface mDataBase;
 
-    public void init(Context context) {
+    public TestPresenter(Context context, String businessType) {
+        super(businessType);
         mDataBase = new DataBaseAdapter();
         mDataBase.init(context);
-        setBusinessType(BusinessType.DIARY.name());
     }
 
     @Override

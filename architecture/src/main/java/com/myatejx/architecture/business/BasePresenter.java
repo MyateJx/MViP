@@ -1,6 +1,6 @@
 package com.myatejx.architecture.business;
 
-import com.myatejx.architecture.business.bus.BaseBus;
+import com.myatejx.architecture.business.bus.VipBus;
 import com.myatejx.architecture.business.bus.Result;
 import com.myatejx.architecture.business.bus.ResultCode;
 
@@ -20,6 +20,10 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class BasePresenter {
 
+    public BasePresenter(String businessType) {
+        this.businessType = businessType;
+    }
+
     private String businessType;
 
     public String getBusinessType() {
@@ -33,23 +37,45 @@ public class BasePresenter {
     /**
      * 在onExcute期间，需要回传进度progress等时使用。
      *
+     * @param e
      * @param result
      */
-    protected void sendMessage(Result result) {
-        BaseBus.response(businessType, result);
+    protected void sendMessage(ObservableEmitter<Result> e, Result result) {
+        e.onNext(result);
     }
 
+    /**
+     * 进度progress等时使用。
+     *
+     * @param e
+     * @param result
+     */
+    protected void onProgress(ObservableEmitter<Result> e, Result result) {
+        sendMessage(e, result);
+    }
+
+    /**
+     * 处理请求，一参数版
+     *
+     * @param iAsync
+     */
     protected void handleRequest(IAsync iAsync) {
         handleRequest(businessType, iAsync);
     }
 
-    protected void handleRequest(final String businessType, final IAsync iAsnycTask) {
+    /**
+     * 处理请求，二参数版
+     *
+     * @param businessType
+     * @param iAsync
+     */
+    protected void handleRequest(final String businessType, final IAsync iAsync) {
         Observable.create(new ObservableOnSubscribe<Result>() {
             @Override
             public void subscribe(ObservableEmitter<Result> e) {
                 try {
-                    if (iAsnycTask != null) {
-                        e.onNext(iAsnycTask.onExecute(e));
+                    if (iAsync != null) {
+                        e.onNext(iAsync.onExecute(e));
                     }
                 } catch (Exception e1) {
                     e.onError(e1);
@@ -65,13 +91,13 @@ public class BasePresenter {
 
                     @Override
                     public void onNext(Result value) {
-                        BaseBus.response(businessType, value);
+                        VipBus.response(businessType, value);
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         Result result = new Result(businessType, ResultCode.FAILURE, e.toString());
-                        BaseBus.response(businessType, result);
+                        VipBus.response(businessType, result);
                     }
 
                     @Override
@@ -82,6 +108,13 @@ public class BasePresenter {
     }
 
     public interface IAsync {
+        /**
+         * 异步执行中
+         *
+         * @param e
+         * @return
+         * @throws IOException
+         */
         Result onExecute(ObservableEmitter<Result> e) throws IOException;
     }
 

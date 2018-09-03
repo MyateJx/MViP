@@ -6,5 +6,7 @@ package com.myatejx.architecture.business.bus;
  */
 public interface IRequest {
 
+    String getBusinessType();
+
 
 }
