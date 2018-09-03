@@ -21,7 +21,6 @@ public class TestPresenter extends BasePresenter implements ITestRequest {
     private IDataBaseInterface mDataBase;
 
     public TestPresenter(Context context, String businessType) {
-        super(businessType);
         mDataBase = new DataBaseAdapter();
         mDataBase.init(context);
     }
@@ -31,7 +30,7 @@ public class TestPresenter extends BasePresenter implements ITestRequest {
         handleRequest(new IAsync() {
             @Override
             public Result onExecute(ObservableEmitter<Result> e) throws IOException {
-                return new Result(getBusinessType(), TestResultCode.GOT_ENTITY, null);
+                return new Result( TestResultCode.GOT_ENTITY, null);
             }
         });
     }
@@ -41,7 +40,7 @@ public class TestPresenter extends BasePresenter implements ITestRequest {
         handleRequest(new IAsync() {
             @Override
             public Result onExecute(ObservableEmitter<Result> e) throws IOException {
-                return new Result(getBusinessType(), TestResultCode.GOT_LIST, null);
+                return new Result( TestResultCode.GOT_LIST, null);
             }
         });
     }
@@ -73,6 +72,11 @@ public class TestPresenter extends BasePresenter implements ITestRequest {
 
     @Override
     public void requestDeletes() {
+
+    }
+
+    @Override
+    public void clear() {
 
     }
 }

@@ -8,12 +8,10 @@ public class Result {
 
     private int resultCode;
     private Object resultObject;
-    private String businessType;
 
-    public Result(String businessType, int resultCode, Object resultObject) {
+    public Result(int resultCode, Object resultObject) {
         this.resultCode = resultCode;
         this.resultObject = resultObject;
-        this.businessType = businessType;
     }
 
     public int getResultCode() {
@@ -32,11 +30,4 @@ public class Result {
         this.resultObject = resultObject;
     }
 
-    public String getBusinessType() {
-        return businessType;
-    }
-
-    public void setBusinessType(String businessType) {
-        this.businessType = businessType;
-    }
 }

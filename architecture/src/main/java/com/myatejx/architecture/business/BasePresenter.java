@@ -1,8 +1,8 @@
 package com.myatejx.architecture.business;
 
-import com.myatejx.architecture.business.bus.VipBus;
 import com.myatejx.architecture.business.bus.Result;
 import com.myatejx.architecture.business.bus.ResultCode;
+import com.myatejx.architecture.business.bus.BaseBus;
 
 import java.io.IOException;
 
@@ -19,20 +19,6 @@ import io.reactivex.schedulers.Schedulers;
  * @date 2018/8/22
  */
 public class BasePresenter {
-
-    public BasePresenter(String businessType) {
-        this.businessType = businessType;
-    }
-
-    private String businessType;
-
-    public String getBusinessType() {
-        return businessType;
-    }
-
-    protected void setBusinessType(String businessType) {
-        this.businessType = businessType;
-    }
 
     /**
      * 在onExcute期间，需要回传进度progress等时使用。
@@ -55,21 +41,11 @@ public class BasePresenter {
     }
 
     /**
-     * 处理请求，一参数版
+     * 处理请求
      *
      * @param iAsync
      */
-    protected void handleRequest(IAsync iAsync) {
-        handleRequest(businessType, iAsync);
-    }
-
-    /**
-     * 处理请求，二参数版
-     *
-     * @param businessType
-     * @param iAsync
-     */
-    protected void handleRequest(final String businessType, final IAsync iAsync) {
+    protected void handleRequest(final IAsync iAsync) {
         Observable.create(new ObservableOnSubscribe<Result>() {
             @Override
             public void subscribe(ObservableEmitter<Result> e) {
@@ -91,13 +67,13 @@ public class BasePresenter {
 
                     @Override
                     public void onNext(Result value) {
-                        VipBus.response(businessType, value);
+                        BaseBus.getInstance().response(value);
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Result result = new Result(businessType, ResultCode.FAILURE, e.toString());
-                        VipBus.response(businessType, result);
+                        Result result = new Result(ResultCode.FAILURE, e.toString());
+                        BaseBus.getInstance().response(result);
                     }
 
                     @Override

@@ -12,11 +12,10 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.myatejx.architecture.business.bus.IResponse;
 import com.myatejx.architecture.business.bus.Result;
-import com.myatejx.architecture.business.bus.VipBus;
 import com.myatejx.vipmvp.R;
 import com.myatejx.vipmvp.bean.TestBean;
 import com.myatejx.vipmvp.business.ITestRequest;
-import com.myatejx.vipmvp.business.constant.BusinessType;
+import com.myatejx.vipmvp.business.TestBus;
 import com.myatejx.vipmvp.business.constant.TestResultCode;
 import com.myatejx.vipmvp.databinding.AdapterTestListBinding;
 import com.myatejx.vipmvp.databinding.FragmentTestListBinding;
@@ -46,8 +45,8 @@ public class TestListFragment extends Fragment implements IResponse {
         mBinding = FragmentTestListBinding.bind(view);
         mBinding.setClickProxy(new ClickProxy());
         setHasOptionsMenu(true);
-        VipBus.registerResponseObserve(BusinessType.DIARY.name(), this);
-        mRequest = (ITestRequest) VipBus.request(BusinessType.DIARY.name());
+        TestBus.getInstance().registerResponseObserve(this);
+        mRequest = (ITestRequest) TestBus.getInstance().request();
         return view;
     }
 
@@ -118,6 +117,6 @@ public class TestListFragment extends Fragment implements IResponse {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        VipBus.unregisterResponseObserve(BusinessType.DIARY.name(), this);
+        TestBus.getInstance().unregisterResponseObserve(this);
     }
 }
