@@ -10,7 +10,7 @@ public class TestBus extends BaseBus<ITestRequest> {
 
     private static TestBus sInstance;
 
-    public static TestBus getInstance() {
+    public static TestBus io() {
         if (sInstance == null) {
             sInstance = new TestBus();
         }
@@ -20,5 +20,12 @@ public class TestBus extends BaseBus<ITestRequest> {
     private TestBus() {
     }
 
+    @Override
+    public ITestRequest request() {
+        if (mIRequest == null) {
+            throw new RuntimeException("please register request handler before request");
+        }
+        return mIRequest;
+    }
 
 }

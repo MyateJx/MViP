@@ -1,4 +1,4 @@
-package com.myatejx.architecture.test;
+package com.myatejx.vipmvp.test;
 
 /**
  * author：xmj

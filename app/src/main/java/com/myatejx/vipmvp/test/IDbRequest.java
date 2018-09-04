@@ -1,10 +1,12 @@
-package com.myatejx.architecture.test;
+package com.myatejx.vipmvp.test;
+
+import com.myatejx.architecture.business.bus.IRequest;
 
 /**
  * author：xmj
  * Create at 2018/9/4
  */
-public interface IDbRequest {
+public interface IDbRequest extends IRequest {
 
     void queryList();
 

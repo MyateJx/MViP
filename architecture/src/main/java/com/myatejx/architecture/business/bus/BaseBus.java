@@ -7,44 +7,42 @@ import java.util.List;
  * @author KunMinX
  * @date 2018/8/22
  */
-public class BaseBus {
+public abstract class BaseBus<Q extends IRequest> {
 
-    private IRequest mIRequest;
-    private List<IResponse> mIResponses = new ArrayList<>();
+    protected Q mIRequest;
+    protected List<IResponse> mIResponses = new ArrayList<>();
 
-    public void registerRequestHandle(IRequest request) {
+    public void registerRequestHandler(Q request) {
         if (request != null) {
             mIRequest = request;
         }
     }
 
-    public void unregisterRequestHandle() {
+    public void unregisterRequestHandler() {
         if (mIRequest != null) {
             mIRequest.clear();
             mIRequest = null;
         }
     }
 
-    public void registerResponseObserve(IResponse response) {
+    public void registerResponseObserver(IResponse response) {
         if (response != null && !mIResponses.contains(response)) {
             mIResponses.add(response);
         }
     }
 
-    public void unregisterResponseObserve(IResponse response) {
+    public void unregisterResponseObserver(IResponse response) {
         if (response != null && mIResponses.contains(response)) {
             mIResponses.remove(response);
         }
     }
 
     public void clearAllRegister() {
-        unregisterRequestHandle();
+        unregisterRequestHandler();
         mIResponses.clear();
     }
 
-    public IRequest request() {
-        return mIRequest;
-    }
+    public abstract Q request();
 
     public void response(Result result) {
         if (mIResponses != null && mIResponses.size() > 0) {

@@ -5,12 +5,10 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.myatejx.architecture.business.bus.BaseBus;
 import com.myatejx.architecture.utils.PermissionUtils;
 import com.myatejx.vipmvp.R;
 import com.myatejx.vipmvp.business.TestBus;
 import com.myatejx.vipmvp.business.TestPresenter;
-import com.myatejx.vipmvp.business.constant.BusinessType;
 import com.myatejx.vipmvp.databinding.ActivityTestBinding;
 
 /**
@@ -39,7 +37,7 @@ public class TestActivity extends AppCompatActivity {
             @Override
             public void onAllowedPermissions() {
                 TestPresenter presenter = new TestPresenter(getApplicationContext());
-                TestBus.getInstance().registerRequestHandle(presenter);
+                TestBus.io().registerRequestHandler(presenter);
                 initView();
             }
 
@@ -53,6 +51,6 @@ public class TestActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        TestBus.getInstance().clearAllRegister();
+        TestBus.io().clearAllRegister();
     }
 }

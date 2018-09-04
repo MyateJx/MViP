@@ -3,7 +3,6 @@ package com.myatejx.architecture.business;
 import android.content.Context;
 
 import com.myatejx.architecture.business.bus.BaseBus;
-import com.myatejx.architecture.business.bus.IRequest;
 import com.myatejx.architecture.business.bus.Result;
 import com.myatejx.architecture.business.bus.ResultCode;
 
@@ -21,12 +20,12 @@ import io.reactivex.schedulers.Schedulers;
  * @author KunMinX
  * @date 2018/8/22
  */
-public class BasePresenter<Q extends IRequest> {
+public class BasePresenter {
 
-    private BaseBus<Q> mBaseBus;
+    private BaseBus mBaseBus;
     protected Context mContext;
 
-    public BasePresenter(Context context, BaseBus<Q> baseBus) {
+    public BasePresenter(Context context, BaseBus baseBus) {
         this.mContext = context;
         this.mBaseBus = baseBus;
     }

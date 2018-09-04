@@ -45,8 +45,8 @@ public class TestListFragment extends Fragment implements IResponse {
         mBinding = FragmentTestListBinding.bind(view);
         mBinding.setClickProxy(new ClickProxy());
         setHasOptionsMenu(true);
-        TestBus.getInstance().registerResponseObserve(this);
-        mRequest = (ITestRequest) TestBus.getInstance().request();
+        TestBus.io().registerResponseObserver(this);
+        mRequest = (ITestRequest) TestBus.io().request();
         return view;
     }
 
@@ -117,6 +117,6 @@ public class TestListFragment extends Fragment implements IResponse {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        TestBus.getInstance().unregisterResponseObserve(this);
+        TestBus.io().unregisterResponseObserver(this);
     }
 }
