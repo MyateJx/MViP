@@ -36,7 +36,7 @@ public class TestActivity extends AppCompatActivity {
         PermissionUtils.requestPermissionInActivity(new PermissionUtils.IPermissionCallback() {
             @Override
             public void onAllowedPermissions() {
-                TestPresenter presenter = new TestPresenter(getApplicationContext());
+                TestPresenter presenter = new TestPresenter(getApplicationContext(), TestBus.io());
                 TestBus.io().registerRequestHandler(presenter);
                 initView();
             }

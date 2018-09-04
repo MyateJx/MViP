@@ -9,7 +9,7 @@ import com.myatejx.vipmvp.business.constant.TestResultCode;
  * Create at 2018/9/1
  */
 
-@ViaAdapter
+/*@ViaAdapter
 public class AnnoBusiness {
 
     @ViaHandler(businessType = BusinessType.DIARY, resultCode = TestResultCode.GOT_LIST)
@@ -17,4 +17,4 @@ public class AnnoBusiness {
         return null;
     }
 
-}
+}*/

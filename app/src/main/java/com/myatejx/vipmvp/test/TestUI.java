@@ -20,6 +20,6 @@ public class TestUI {
         ITestRequest iTestRequest = (ITestRequest) BaseBus.io().request();
         iTestRequest.requestList();
 
-        ViaBus.of(iTestRequest).request().clear();
+//        ViaBus.of(iTestRequest).request().clear();
     }
 }

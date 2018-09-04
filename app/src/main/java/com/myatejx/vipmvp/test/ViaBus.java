@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class ViaBus<Q extends IRequest> {
 
-    private static List<BaseBus> sBuses = new ArrayList<>();
+    /*private static List<BaseBus> sBuses = new ArrayList<>();
 
     public static <Q extends IRequest> BaseBus of(Q iRequest) {
         if (iRequest == null) {
@@ -28,6 +28,6 @@ public class ViaBus<Q extends IRequest> {
         baseBus.registerRequestHandler(iRequest);
         sBuses.add(baseBus);
         return baseBus;
-    }
+    }*/
 
 }

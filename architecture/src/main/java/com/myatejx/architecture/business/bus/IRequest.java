@@ -8,6 +8,4 @@ public interface IRequest {
 
     void clear();
 
-    IResponse response();
-
 }
