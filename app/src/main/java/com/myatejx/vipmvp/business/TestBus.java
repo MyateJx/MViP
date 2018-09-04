@@ -22,10 +22,6 @@ public class TestBus extends BaseBus<ITestRequest> {
 
     @Override
     public ITestRequest request() {
-        if (mIRequest == null) {
-            throw new RuntimeException("please register request handler before request");
-        }
-        return mIRequest;
+        return super.request();
     }
-
 }

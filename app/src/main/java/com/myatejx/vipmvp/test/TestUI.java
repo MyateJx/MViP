@@ -1,8 +1,8 @@
 package com.myatejx.vipmvp.test;
 
-import com.myatejx.architecture.business.bus.Result;
+import com.myatejx.architecture.business.bus.BaseBus;
+import com.myatejx.vipmvp.business.ITestRequest;
 import com.myatejx.vipmvp.business.TestBus;
-import com.myatejx.vipmvp.business.TestPresenter;
 
 /**
  * @author xmj
@@ -17,5 +17,9 @@ public class TestUI {
         TestBus.io().request().requestList();
 //        TestBus.io().registerResponseObserver(this);
 //        TestBus.io().registerRequestHandler(new TestPresenter());
+        ITestRequest iTestRequest = (ITestRequest) BaseBus.io().request();
+        iTestRequest.requestList();
+
+        ViaBus.of(iTestRequest).request().clear();
     }
 }

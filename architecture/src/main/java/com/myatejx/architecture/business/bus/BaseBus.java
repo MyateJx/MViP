@@ -7,10 +7,22 @@ import java.util.List;
  * @author KunMinX
  * @date 2018/8/22
  */
-public abstract class BaseBus<Q extends IRequest> {
+public class BaseBus<Q extends IRequest> {
 
-    protected Q mIRequest;
-    protected List<IResponse> mIResponses = new ArrayList<>();
+    private static BaseBus sInstance;
+
+    public static BaseBus io() {
+        if (sInstance == null) {
+            sInstance = new BaseBus();
+        }
+        return sInstance;
+    }
+
+    protected BaseBus() {
+    }
+
+    private Q mIRequest;
+    private List<IResponse> mIResponses = new ArrayList<>();
 
     public void registerRequestHandler(Q request) {
         if (request != null) {
@@ -42,7 +54,12 @@ public abstract class BaseBus<Q extends IRequest> {
         mIResponses.clear();
     }
 
-    public abstract Q request();
+    public Q request() {
+        if (mIRequest == null) {
+            throw new RuntimeException("please register request handler before request");
+        }
+        return mIRequest;
+    }
 
     public void response(Result result) {
         if (mIResponses != null && mIResponses.size() > 0) {
