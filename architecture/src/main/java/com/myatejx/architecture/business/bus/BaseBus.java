@@ -1,67 +1,55 @@
 package com.myatejx.architecture.business.bus;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
  * @author KunMinX
  * @date 2018/8/22
+ * <p>
+ * 虽然ui和业务可以多对多，但从request和response关系上讲，不是对称的多对多。
+ * 一个ui一次仅可以筛选并请求一个业务，但业务响应的结果可以遍历分发给多个ui。
+ * 换个角度说，ui接口的实现者实例可以有多个，业务接口的实现者实例只有一个。
+ * 因此，ui用list装载，遍历皆回调（反注册的反正都已不在list中，不再监听响应）。业务用map装载，针对性的请求。
  */
-public class BaseBus<Q extends IRequest> {
+public class BaseBus {
 
-    private static BaseBus sInstance;
+    private static HashMap<String, IRequest> mIRequest = new HashMap<>();
+    private static List<IResponse> mIResponses = new ArrayList<>();
 
-    public static BaseBus io() {
-        if (sInstance == null) {
-            sInstance = new BaseBus();
-        }
-        return sInstance;
-    }
-
-    protected BaseBus() {
-    }
-
-    private Q mIRequest;
-    private List<IResponse> mIResponses = new ArrayList<>();
-
-    public void registerRequestHandler(Q request) {
-        if (request != null) {
-            mIRequest = request;
+    public static void registerRequestHandler(IRequest request) {
+        String name = request.getClass().getSimpleName();
+        if (mIRequest.get(name) == null) {
+            mIRequest.put(name, request);
         }
     }
 
-    public void unregisterRequestHandler() {
-        if (mIRequest != null) {
-            mIRequest.clear();
-            mIRequest = null;
+    public static void unregisterRequestHandler(IRequest request) {
+        String name = request.getClass().getSimpleName();
+        if (mIRequest.get(name) != null) {
+            mIRequest.remove(name);
         }
     }
 
-    public void registerResponseObserver(IResponse response) {
+    public static void registerResponseObserver(IResponse response) {
         if (response != null && !mIResponses.contains(response)) {
             mIResponses.add(response);
         }
     }
 
-    public void unregisterResponseObserver(IResponse response) {
+    public static void unregisterResponseObserver(IResponse response) {
         if (response != null && mIResponses.contains(response)) {
             mIResponses.remove(response);
         }
     }
 
-    public void clearAllRegister() {
-        unregisterRequestHandler();
+    public static void clearAllRegister() {
+        mIRequest.clear();
         mIResponses.clear();
     }
 
-    public Q request() {
-        if (mIRequest == null) {
-            throw new RuntimeException("please register request handler before request");
-        }
-        return mIRequest;
-    }
-
-    public void response(Result result) {
+    public static void response(Result result) {
         if (mIResponses != null && mIResponses.size() > 0) {
             for (IResponse response : mIResponses) {
                 response.onResult(result);
@@ -69,4 +57,11 @@ public class BaseBus<Q extends IRequest> {
         }
     }
 
+    protected static IRequest getRequest(Class iRequest) {
+        IRequest iRequest1 = mIRequest.get(iRequest.getSimpleName());
+        if (iRequest1 == null) {
+            throw new RuntimeException("Error: Please register a request '" + iRequest.getSimpleName() + "' by bus");
+        }
+        return iRequest1;
+    }
 }

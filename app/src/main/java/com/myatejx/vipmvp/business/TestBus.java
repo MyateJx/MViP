@@ -22,6 +22,6 @@ public class TestBus extends BaseBus<ITestRequest> {
 
     @Override
     public ITestRequest request() {
-        return super.request();
+        return super.getRequest();
     }
 }

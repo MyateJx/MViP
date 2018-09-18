@@ -12,5 +12,5 @@ public interface INetRequest {
 
     void put();
 
-    void options();
+    void delete();
 }
