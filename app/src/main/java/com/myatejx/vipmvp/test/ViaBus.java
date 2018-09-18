@@ -1,10 +1,6 @@
 package com.myatejx.vipmvp.test;
 
-import com.myatejx.architecture.business.bus.BaseBus;
 import com.myatejx.architecture.business.bus.IRequest;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author xmj

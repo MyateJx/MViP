@@ -21,5 +21,8 @@ public class TestUI {
         iTestRequest.requestList();
 
 //        ViaBus.of(iTestRequest).request().clear();
+
+        ((ITestRequest)BaseBus.io().request()).requestList();
+//        BaseBus.io().registerRequestHandler();
     }
 }
