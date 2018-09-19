@@ -1,7 +1,5 @@
 package com.myatejx.architecture.business;
 
-import android.content.Context;
-
 import com.myatejx.architecture.business.bus.BaseBus;
 import com.myatejx.architecture.business.bus.Result;
 import com.myatejx.architecture.business.bus.ResultCode;
@@ -85,7 +83,7 @@ public class BasePresenter<B extends BaseBus> {
                 });
     }
 
-    public interface IAsync {
+    protected interface IAsync {
         /**
          * 异步执行中
          *
