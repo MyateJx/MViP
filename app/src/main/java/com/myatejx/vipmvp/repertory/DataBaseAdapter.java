@@ -2,7 +2,7 @@ package com.myatejx.vipmvp.repertory;
 
 import android.content.Context;
 
-import com.myatejx.vipmvp.bean.TestBean;
+import com.myatejx.vipmvp.bean.NoteBean;
 import com.myatejx.vipmvp.business.constant.Configs;
 import com.myatejx.vipmvp.repertory.model.AppDatabase;
 
@@ -12,69 +12,69 @@ import java.util.List;
  * @author KunMinX
  * @date 2018/8/22
  */
-public class DataBaseAdapter implements IDataBaseInterface<TestBean> {
+public class DataBaseAdapter implements IDataBaseInterface<NoteBean> {
     @Override
     public void init(Context context) {
         AppDatabase.init(context, Configs.DB_PATH);
     }
 
     @Override
-    public List<TestBean> getList() {
+    public List<NoteBean> getList() {
         return AppDatabase.getInstance().testDao().getBeans();
     }
 
     @Override
-    public List<TestBean> getList(String tag, String type) {
+    public List<NoteBean> getList(String tag, String type) {
         return null;
     }
 
     @Override
-    public TestBean getEntity(String uuid) {
+    public NoteBean getEntity(String uuid) {
         return AppDatabase.getInstance().testDao().getBean(0);
     }
 
     @Override
-    public long insertEntity(TestBean t) {
+    public long insertEntity(NoteBean t) {
         return 0;
     }
 
     @Override
-    public int updateEntity(TestBean t) {
+    public int updateEntity(NoteBean t) {
         return 0;
     }
 
     @Override
-    public int deleteEntity(TestBean t) {
+    public int deleteEntity(NoteBean t) {
         return 0;
     }
 
     @Override
-    public boolean insertEntities(TestBean... ts) {
+    public boolean insertEntities(NoteBean... ts) {
         return false;
     }
 
     @Override
-    public boolean updateEntities(TestBean... ts) {
+    public boolean updateEntities(NoteBean... ts) {
         return false;
     }
 
     @Override
-    public boolean deleteEntities(TestBean... ts) {
+    public boolean deleteEntities(NoteBean... ts) {
         return false;
     }
 
     @Override
-    public boolean insertEntities(List<TestBean> ts) {
+    public boolean insertEntities(List<NoteBean> ts) {
         return false;
     }
 
     @Override
-    public boolean updateEntities(List<TestBean> ts) {
+    public boolean updateEntities(List<NoteBean> ts) {
         return false;
     }
 
     @Override
-    public boolean deleteEntities(List<TestBean> ts) {
+    public boolean deleteEntities(List<NoteBean> ts) {
         return false;
     }
 }

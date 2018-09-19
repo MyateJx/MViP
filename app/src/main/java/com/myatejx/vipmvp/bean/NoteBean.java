@@ -10,7 +10,7 @@ import android.arch.persistence.room.PrimaryKey;
  * 实体类
  */
 @Entity
-public class TestBean {
+public class NoteBean {
 
     @PrimaryKey(autoGenerate = true)
     private Long id;
@@ -18,7 +18,7 @@ public class TestBean {
     private String date;
     private String imgUrl;
 
-    public TestBean(Long id, String title, String date, String imgUrl) {
+    public NoteBean(Long id, String title, String date, String imgUrl) {
         this.id = id;
         this.title = title;
         this.date = date;

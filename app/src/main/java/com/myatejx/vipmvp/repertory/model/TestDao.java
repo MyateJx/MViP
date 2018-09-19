@@ -3,7 +3,7 @@ package com.myatejx.vipmvp.repertory.model;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Query;
 
-import com.myatejx.vipmvp.bean.TestBean;
+import com.myatejx.vipmvp.bean.NoteBean;
 
 import java.util.List;
 
@@ -14,11 +14,11 @@ import java.util.List;
 @Dao
 public interface TestDao {
 
-    @Query("SELECT * FROM TestBean")
-    List<TestBean> getBeans();
+    @Query("SELECT * FROM NoteBean")
+    List<NoteBean> getBeans();
 
-    @Query("SELECT * FROM TestBean WHERE id=:id")
-    TestBean getBean(int id);
+    @Query("SELECT * FROM NoteBean WHERE id=:id")
+    NoteBean getBean(int id);
 
 
 

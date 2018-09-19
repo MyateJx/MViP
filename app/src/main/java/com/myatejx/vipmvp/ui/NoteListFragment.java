@@ -13,12 +13,11 @@ import com.bumptech.glide.Glide;
 import com.myatejx.architecture.business.bus.IResponse;
 import com.myatejx.architecture.business.bus.Result;
 import com.myatejx.vipmvp.R;
-import com.myatejx.vipmvp.bean.TestBean;
-import com.myatejx.vipmvp.business.ITestRequest;
-import com.myatejx.vipmvp.business.TestBus;
-import com.myatejx.vipmvp.business.constant.TestResultCode;
+import com.myatejx.vipmvp.bean.NoteBean;
+import com.myatejx.vipmvp.business.bus.NoteBus;
+import com.myatejx.vipmvp.business.constant.NoteResultCode;
 import com.myatejx.vipmvp.databinding.AdapterTestListBinding;
-import com.myatejx.vipmvp.databinding.FragmentTestListBinding;
+import com.myatejx.vipmvp.databinding.FragmentNoteListBinding;
 import com.myatejx.vipmvp.ui.adapter.BaseBindingAdapter;
 
 import java.util.List;
@@ -27,26 +26,24 @@ import java.util.List;
  * @author KunMinX
  * @date 2018/8/21
  */
-public class TestListFragment extends Fragment implements IResponse {
+public class NoteListFragment extends Fragment implements IResponse {
 
-    private FragmentTestListBinding mBinding;
-    private ITestRequest mRequest;
-    private BaseBindingAdapter<TestBean, AdapterTestListBinding> mAdapter;
+    private FragmentNoteListBinding mBinding;
+    private BaseBindingAdapter<NoteBean, AdapterTestListBinding> mAdapter;
 
-    public static TestListFragment newInstance() {
-        TestListFragment fragment = new TestListFragment();
+    public static NoteListFragment newInstance() {
+        NoteListFragment fragment = new NoteListFragment();
         return fragment;
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_test_list, container, false);
-        mBinding = FragmentTestListBinding.bind(view);
+        View view = inflater.inflate(R.layout.fragment_note_list, container, false);
+        mBinding = FragmentNoteListBinding.bind(view);
         mBinding.setClickProxy(new ClickProxy());
         setHasOptionsMenu(true);
-        TestBus.io().registerResponseObserver(this);
-        mRequest = (ITestRequest) TestBus.io().request();
+        NoteBus.registerResponseObserver(this);
         return view;
     }
 
@@ -57,34 +54,34 @@ public class TestListFragment extends Fragment implements IResponse {
     }
 
     private void initViews() {
-        mAdapter = new BaseBindingAdapter<TestBean, AdapterTestListBinding>(getContext()) {
+        mAdapter = new BaseBindingAdapter<NoteBean, AdapterTestListBinding>(getContext()) {
             @Override
             protected int getLayoutResId(int viewType) {
                 return R.layout.adapter_test_list;
             }
 
             @Override
-            protected void onBindItem(AdapterTestListBinding binding, final TestBean item, int position) {
+            protected void onBindItem(AdapterTestListBinding binding, final NoteBean item, int position) {
                 binding.tvTitle.setText(item.getTitle());
                 Glide.with(getContext()).load(item.getImgUrl()).into(binding.ivThumb);
                 binding.getRoot().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         getActivity().getSupportFragmentManager().beginTransaction()
-                                .add(R.id.fragment_container, TestDetailFragment.newInstance(item.getTitle()))
+                                .add(R.id.fragment_container, NoteDetailFragment.newInstance(item.getTitle()))
                                 .addToBackStack(null).commit();
                     }
                 });
             }
         };
         mBinding.rv.setAdapter(mAdapter);
-        mRequest.requestList();
+        NoteBus.note().queryList();
     }
 
     public class ClickProxy {
         public void newTest() {
             getActivity().getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragment_container, TestDetailFragment.newInstance(""))
+                    .add(R.id.fragment_container, NoteDetailFragment.newInstance(""))
                     .addToBackStack(null).commit();
         }
     }
@@ -93,21 +90,21 @@ public class TestListFragment extends Fragment implements IResponse {
     public void onResult(Result testResult) {
         int resultCode = testResult.getResultCode();
         switch (resultCode) {
-            case TestResultCode.GOT_LIST:
-                List<TestBean> beanList;
+            case NoteResultCode.QUERY_LIST:
+                List<NoteBean> beanList;
                 if (testResult.getResultObject() != null) {
-                    beanList = (List<TestBean>) testResult.getResultObject();
+                    beanList = (List<NoteBean>) testResult.getResultObject();
                     mAdapter.setList(beanList);
                     mAdapter.notifyDataSetChanged();
                 }
                 break;
-            case TestResultCode.INSERTED:
+            case NoteResultCode.INSERTED:
 
                 break;
-            case TestResultCode.FAILURE:
+            case NoteResultCode.FAILURE:
                 Toast.makeText(getContext(), "数据请求失败", Toast.LENGTH_SHORT).show();
                 break;
-            case TestResultCode.CANCELED:
+            case NoteResultCode.CANCELED:
                 Toast.makeText(getContext(), "数据请求取消", Toast.LENGTH_SHORT).show();
                 break;
             default:
@@ -117,6 +114,6 @@ public class TestListFragment extends Fragment implements IResponse {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        TestBus.io().unregisterResponseObserver(this);
+        NoteBus.unregisterResponseObserver(this);
     }
 }

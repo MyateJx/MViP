@@ -12,25 +12,23 @@ import android.view.ViewGroup;
 import com.myatejx.architecture.business.bus.IResponse;
 import com.myatejx.architecture.business.bus.Result;
 import com.myatejx.vipmvp.R;
-import com.myatejx.vipmvp.business.ITestRequest;
-import com.myatejx.vipmvp.business.TestBus;
-import com.myatejx.vipmvp.business.constant.TestResultCode;
-import com.myatejx.vipmvp.databinding.FragmentTestDetailBinding;
+import com.myatejx.vipmvp.business.bus.NoteBus;
+import com.myatejx.vipmvp.business.constant.NoteResultCode;
+import com.myatejx.vipmvp.databinding.FragmentNoteDetailBinding;
 
 /**
  * @author KunMinX
  * @date 2018/8/21
  */
-public class TestDetailFragment extends Fragment implements IResponse {
+public class NoteDetailFragment extends Fragment implements IResponse {
 
-    private FragmentTestDetailBinding mBinding;
-    private ITestRequest mRequest;
+    private FragmentNoteDetailBinding mBinding;
     private final static String TITLE = "TITLE";
     private String mTitle;
     private boolean mIsNew;
 
-    public static TestDetailFragment newInstance(String title) {
-        TestDetailFragment fragment = new TestDetailFragment();
+    public static NoteDetailFragment newInstance(String title) {
+        NoteDetailFragment fragment = new NoteDetailFragment();
         Bundle bundle = new Bundle();
         bundle.putString(TITLE, title);
         fragment.setArguments(bundle);
@@ -40,12 +38,11 @@ public class TestDetailFragment extends Fragment implements IResponse {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_test_detail, container, false);
-        mBinding = FragmentTestDetailBinding.bind(view);
+        View view = inflater.inflate(R.layout.fragment_note_detail, container, false);
+        mBinding = FragmentNoteDetailBinding.bind(view);
         mBinding.setClickProxy(new ClickProxy());
         setHasOptionsMenu(true);
-//        TestBus.io().registerResponseObserver(this);
-        mRequest = (ITestRequest) TestBus.io().request();
+        NoteBus.registerResponseObserver(this);
         return view;
     }
 
@@ -68,15 +65,15 @@ public class TestDetailFragment extends Fragment implements IResponse {
         public void save() {
             if (!mBinding.et.getText().toString().equals(mTitle)) {
                 if (mIsNew) {
-                    mRequest.requestInsert();
+                    NoteBus.note().insert(null);
                 } else {
-                    mRequest.requestUpdate();
+                    NoteBus.note().update(null);
                 }
             }
         }
 
         public void delete() {
-            mRequest.requestDelete();
+            NoteBus.note().delete(null);
         }
     }
 
@@ -84,15 +81,15 @@ public class TestDetailFragment extends Fragment implements IResponse {
     public void onResult(Result testResult) {
         int resultCode = testResult.getResultCode();
         switch (resultCode) {
-            case TestResultCode.INSERTED:
+            case NoteResultCode.INSERTED:
                 break;
-            case TestResultCode.UPDATED:
+            case NoteResultCode.UPDATED:
                 break;
-            case TestResultCode.DELETED:
+            case NoteResultCode.DELETED:
                 break;
-            case TestResultCode.FAILURE:
+            case NoteResultCode.FAILURE:
                 break;
-            case TestResultCode.CANCELED:
+            case NoteResultCode.CANCELED:
                 break;
             default:
         }
@@ -101,6 +98,6 @@ public class TestDetailFragment extends Fragment implements IResponse {
     @Override
     public void onDestroy() {
         super.onDestroy();
-//        TestBus.io().unregisterResponseObserver(this);
+        NoteBus.unregisterResponseObserver(this);
     }
 }

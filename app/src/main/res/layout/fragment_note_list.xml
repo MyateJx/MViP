@@ -6,7 +6,7 @@
 
         <variable
             name="clickProxy"
-            type="com.myatejx.vipmvp.ui.TestListFragment.ClickProxy"/>
+            type="com.myatejx.vipmvp.ui.NoteListFragment.ClickProxy"/>
 
     </data>
 

@@ -79,10 +79,8 @@ public abstract class BaseBindingAdapter<M, B extends ViewDataBinding> extends R
         this.onBindItem(binding, this.mList.get(position), position);
     }
 
-    protected abstract
-    @LayoutRes
+    protected abstract @LayoutRes
     int getLayoutResId(int viewType);
-
 
     protected abstract void onBindItem(B binding, M item, int position);
 

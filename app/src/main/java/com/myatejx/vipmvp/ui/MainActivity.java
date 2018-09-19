@@ -5,34 +5,30 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.myatejx.architecture.business.bus.IResponse;
-import com.myatejx.architecture.business.bus.Result;
 import com.myatejx.architecture.utils.PermissionUtils;
 import com.myatejx.vipmvp.R;
-import com.myatejx.vipmvp.business.TestBus;
-import com.myatejx.vipmvp.business.TestPresenter;
-import com.myatejx.vipmvp.databinding.ActivityTestBinding;
-import com.myatejx.vipmvp.test.INetRequest;
+import com.myatejx.vipmvp.business.NoteBusiness;
+import com.myatejx.vipmvp.business.bus.NoteBus;
+import com.myatejx.vipmvp.databinding.ActivityMainBinding;
 
 /**
  * @author KunMinX
  * @date 2018/8/21
  */
-public class TestActivity extends AppCompatActivity implements IResponse {
+public class MainActivity extends AppCompatActivity {
 
-    private ActivityTestBinding mBinding;
+    private ActivityMainBinding mBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        TBus.registerResponseObserver(this);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_test);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         initModel();
     }
 
     private void initView() {
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.fragment_container, TestListFragment.newInstance())
+                .add(R.id.fragment_container, NoteListFragment.newInstance())
                 .addToBackStack(null).commit();
     }
 
@@ -40,7 +36,9 @@ public class TestActivity extends AppCompatActivity implements IResponse {
         PermissionUtils.requestPermissionInActivity(new PermissionUtils.IPermissionCallback() {
             @Override
             public void onAllowedPermissions() {
-                TestPresenter presenter = new TestPresenter(getApplicationContext(), TestBus.io());
+                NoteBusiness noteBusiness = new NoteBusiness();
+                noteBusiness.init(getApplicationContext());
+                NoteBus.registerRequestHandler(noteBusiness);
                 initView();
             }
 
@@ -49,17 +47,11 @@ public class TestActivity extends AppCompatActivity implements IResponse {
 
             }
         }, this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        TBus.net().get();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        TBus.unregisterResponseObserver(this);
     }
 
-    @Override
-    public void onResult(Result testResult) {
-
-    }
 }

@@ -6,13 +6,13 @@ import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-import com.myatejx.vipmvp.bean.TestBean;
+import com.myatejx.vipmvp.bean.NoteBean;
 
 /**
  * @author KunMinX
  * @date 2018/6/30
  */
-@Database(entities = {TestBean.class}, version = 1, exportSchema = false)
+@Database(entities = {NoteBean.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static String sDbPath = null;

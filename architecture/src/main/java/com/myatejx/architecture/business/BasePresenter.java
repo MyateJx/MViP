@@ -20,15 +20,7 @@ import io.reactivex.schedulers.Schedulers;
  * @author KunMinX
  * @date 2018/8/22
  */
-public class BasePresenter {
-
-    private BaseBus mBaseBus;
-    protected Context mContext;
-
-    public BasePresenter(Context context, BaseBus baseBus) {
-        this.mContext = context;
-        this.mBaseBus = baseBus;
-    }
+public class BasePresenter<B extends BaseBus> {
 
     /**
      * 在onExcute期间，需要回传进度progress等时使用。
@@ -77,13 +69,13 @@ public class BasePresenter {
 
                     @Override
                     public void onNext(Result value) {
-                        mBaseBus.response(value);
+                        B.response(value);
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         Result result = new Result(ResultCode.FAILURE, e.toString());
-                        mBaseBus.response(result);
+                        B.response(result);
                     }
 
                     @Override
